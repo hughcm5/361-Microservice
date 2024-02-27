@@ -1,0 +1,3 @@
+1. You can request data by using socket.recv_string() after sending it in your other file while using ZeroMQ Python.
+2. You can send data by using socket.send_string(**YOUR INPUT**)
+    - You can always convert the data to str and back to int if needed. 
