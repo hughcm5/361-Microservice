@@ -4,20 +4,18 @@ def calculate(number):
     return 1600 - number
 
 def main():
-    # Create a ZeroMQ context
     context = zmq.Context()
 
-    # Create a socket to receive messages
     socket = context.socket(zmq.REP)
-    socket.bind("tcp://*:5555")  # Binding to TCP port 5555
+    socket.bind("tcp://*:5555")  
 
-    print("Server running")
+    print("Server running") # Check if server is running
 
     while True:
         # Recieves the number
         number = int(socket.recv_string())
 
-        # Subtract
+        # Run calculate function
         result = calculate(number)
 
         # Send back to client

@@ -2,13 +2,11 @@ import zmq
 import time
 
 def main():
-    # Create a ZeroMQ context
     context = zmq.Context()
 
-    # Create a socket to connect to the server
     print("Connecting to server")
     socket = context.socket(zmq.REQ)
-    socket.connect("tcp://localhost:5555")  # Connecting to the microservice
+    socket.connect("tcp://localhost:5555")
 
     time.sleep(1.0)
 
