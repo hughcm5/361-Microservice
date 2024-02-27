@@ -1,7 +1,7 @@
 import zmq
 
 def calculate(number):
-    return 1600 - number
+    return 1600 - number  # Average base metabolic rate
 
 def main():
     context = zmq.Context()
