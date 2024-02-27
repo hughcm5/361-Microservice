@@ -8,7 +8,7 @@ def main():
     socket = context.socket(zmq.REQ)
     socket.connect("tcp://localhost:5555")
 
-    time.sleep(1.0)
+    time.sleep(1.0)  # Make it look like it's doing something
 
     # Take user input for the number
     number = int(input("Enter a number: "))
