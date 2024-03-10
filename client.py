@@ -14,16 +14,14 @@ def main():
         cals = int(input("Enter number of calories consumed: "))
         activity = input("Enter activity level(sedentary, light, moderate, or active): ")
 
-        cals = str(cals)
-        lst = [activity,cals]
-        encoded_lst = json.dumps(lst)
+        # Create a list with calorie count as a string and activity level as a string
+        data = [str(cals), activity]
 
-        # Send the number to the microservice
-        socket.send_json(encoded_lst)
+        # Send the list to the server
+        socket.send_json(data)
 
         # Receive and print the result
         result = socket.recv_string()
-
         print(f"Result: {result}")
 
 

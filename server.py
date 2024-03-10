@@ -3,18 +3,23 @@ import json
 
 
 def calculate(activity, cals):
+    """
+    Calculate calories burned
+    """
     bmr = 1600
+    activity_calories = 0
 
     if activity == 'sedentary':
-        activity = 350
+        activity_calories = 350
     elif activity == 'light':
-        activity = 700
+        activity_calories = 700
     elif activity == 'moderate':
-        activity = 850
+        activity_calories = 850
     elif activity == 'active':
-        activity = 1000
-
-    return cals - bmr - activity
+        activity_calories = 1000
+    else:
+        activity_calories = 0
+    return int(cals) - bmr - activity_calories
 
 def main():
     context = zmq.Context()
@@ -27,18 +32,20 @@ def main():
     while True:
         # Receive data from client
         data = socket.recv_json()
-        print(data)
+        
 
-        activity = data[0]
-        cals = data[1]
+        # Get first and second items of list
+        cals = data[0]
+        activity = data[1]
 
         # Run calculate function
         result = calculate(activity, cals)
 
-        result = str(result)
+        # Convert result to string
+        result_str = str(result)
 
         # Send back to client
-        socket.send_string(result)
+        socket.send_string(result_str)
 
 if __name__ == "__main__":
     main()
