@@ -1,7 +1,20 @@
 import zmq
+import json
 
-def calculate(number):
-    return 1600 - number  # Average base metabolic rate
+
+def calculate(activity, cals):
+    bmr = 1600
+
+    if activity == 'sedentary':
+        activity = 350
+    elif activity == 'light':
+        activity = 700
+    elif activity == 'moderate':
+        activity = 850
+    elif activity == 'active':
+        activity = 1000
+
+    return cals - bmr - activity
 
 def main():
     context = zmq.Context()
@@ -12,14 +25,20 @@ def main():
     print("Server running") # Check if server is running
 
     while True:
-        # Recieves the number
-        number = int(socket.recv_string())
+        # Receive data from client
+        data = socket.recv_json()
+        print(data)
+
+        activity = data[0]
+        cals = data[1]
 
         # Run calculate function
-        result = calculate(number)
+        result = calculate(activity, cals)
+
+        result = str(result)
 
         # Send back to client
-        socket.send_string(str(result))
+        socket.send_string(result)
 
 if __name__ == "__main__":
     main()

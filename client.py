@@ -1,5 +1,6 @@
 import zmq
 import time
+import json
 
 def main():
     context = zmq.Context()
@@ -8,21 +9,23 @@ def main():
     socket = context.socket(zmq.REQ)
     socket.connect("tcp://localhost:5555")
 
-    time.sleep(1.0)  # Make it look like it's doing something
+    while True:
+        # Take user input for the number
+        cals = int(input("Enter number of calories consumed: "))
+        activity = input("Enter activity level(sedentary, light, moderate, or active): ")
 
-    # Take user input for the number
-    number = int(input("Enter a number: "))
+        cals = str(cals)
+        lst = [activity,cals]
+        encoded_lst = json.dumps(lst)
 
+        # Send the number to the microservice
+        socket.send_json(encoded_lst)
 
-    # Send the number to the microservice
-    socket.send_string(str(number))
+        # Receive and print the result
+        result = socket.recv_string()
 
-    # Receive and print the result
-    result = int(socket.recv_string())
-    print(f"Result: {result}")
+        print(f"Result: {result}")
 
-    # Run until user closes terminal
-    main()
 
 if __name__ == "__main__":
     main()
