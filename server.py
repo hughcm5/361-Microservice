@@ -34,8 +34,7 @@ def main():
         
 
         # Get first and second items of list
-        cals = data[0]
-        activity = data[1]
+        cals, activity = data[0], data[1]
 
         # Run calculate function
         result = calculate(activity, cals)
