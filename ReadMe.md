@@ -1,4 +1,5 @@
-![alt text](https://github.com/hughcm5/361-Microservice/blob/main/UML.PNG "Logo Title Text 1)
+![image](https://github.com/hughcm5/361-Microservice/assets/69122049/4aa2b12a-09fa-439e-a7ab-cbcf08746fe8)
+
 
 The microserive can send two data inputs using Python ZMQ by encoding them as JSON data. After taking input from the user, you can follow these steps
 
